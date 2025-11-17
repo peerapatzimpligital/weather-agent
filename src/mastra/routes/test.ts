@@ -1,0 +1,18 @@
+import { Mastra } from "@mastra/core/mastra";
+import { registerApiRoute } from "@mastra/core/server";
+
+export const mastra = new Mastra({
+    server: {
+        apiRoutes: [
+            registerApiRoute("/my-custom-route", {
+                method: "GET",
+                handler: async (c) => {
+                    const mastra = c.get("mastra");
+                    const agents = await mastra.getAgent("my-agent");
+
+                    return c.json({ message: "Custom route" });
+                },
+            }),
+        ],
+    },
+});
