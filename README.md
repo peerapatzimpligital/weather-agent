@@ -34,3 +34,4 @@ Set the `MODEL` environment variable in your `.env` file to your preferred model
 ## Environment Variables
 
 - `OPENAI_API_KEY`: Your API key for your chosen provider. [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+.
