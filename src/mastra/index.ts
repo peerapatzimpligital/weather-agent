@@ -4,6 +4,8 @@ import { LibSQLStore } from '@mastra/libsql';
 import { weatherWorkflow } from './workflows';
 import { weatherAgent } from './agents';
 import { toolCallAppropriatenessScorer, completenessScorer, translationScorer } from './scorers';
+import { registerApiRoute } from "@mastra/core/server";
+
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -25,5 +27,18 @@ export const mastra = new Mastra({
   },
   bundler: {
     externals: ['difflib'],
-  }
+  },
+  server: {
+    apiRoutes: [
+      registerApiRoute("/my-custom-route", {
+        method: "GET",
+        handler: async (c) => {
+          const mastra = c.get("mastra");
+          const agents = await mastra.getAgent("my-agent");
+
+          return c.json({ message: "Custom route" });
+        },
+      }),
+    ],
+  },
 });
