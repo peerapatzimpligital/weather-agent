@@ -34,7 +34,7 @@ export const mastra = new Mastra({
         method: "GET",
         handler: async (c) => {
           const mastra = c.get("mastra");
-          const agents = await mastra.getAgent("my-agent");
+          // const agents = await mastra.getAgent("my-agent");
 
           return c.json({ message: "Custom route" });
         },
